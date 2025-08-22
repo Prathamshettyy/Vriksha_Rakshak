@@ -1,12 +1,20 @@
-pandas
--f https://download.pytorch.org/whl/torch_stable.html                                                                                                                                                             
-torch==2.0.1+cpu
+# This line tells pip to look for PyTorch wheels in the specified URL,
+# which helps in finding the correct version for your system (CPU or GPU).
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Core machine learning and data science libraries
+torch
 torchvision
+pandas
 numpy
 matplotlib
-flask==2.0.0
 seaborn
+
+# Web framework and server
+flask
 gunicorn
 flask-cors
+
+# Miscellaneous utilities
 pyfcm
 python-decouple
