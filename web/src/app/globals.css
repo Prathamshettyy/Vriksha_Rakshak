@@ -57,7 +57,7 @@
 
 @layer base {
   * {
-    @apply border-border transition-all duration-300 ease-in-out;
+    @apply border-border; /* Removed transition-all duration-300 ease-in-out */
   }
   body {
     @apply bg-background text-foreground font-sans;
@@ -107,4 +107,3 @@
   transform: scale(1.05);
   filter: brightness(1.1);
 }
-
