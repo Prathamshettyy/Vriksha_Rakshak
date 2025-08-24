@@ -1,10 +1,13 @@
-import { ThemeToggle } from "@/components/ui/theme-toggle"
-import { siteConfig } from "@/config/site"
-import Link from "next/link"
+// Inside web/src/components/navbar.tsx
+
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 export function Navbar() {
   return (
-    <nav className="flex fixed w-full backdrop-blur-sm items-center px-4 py-4 justify-between z-50">
+    // Add the new text color class here
+    <nav className="flex fixed w-full backdrop-blur-sm items-center px-4 py-4 justify-between z-50 bg-[hsl(var(--navbar-background))] text-[hsl(var(--navbar-foreground))]">
       <div className="flex gap-8 items-center">
         <div>
           <p className="scroll-m-20 text-xl font-semibold">
@@ -13,14 +16,18 @@ export function Navbar() {
         </div>
         <ul className="flex gap-4">
           <li className="cursor-pointer">
-            <Link href="/home" className="nav-link">Home</Link>
+            <Link href="/home" className="nav-link">
+              <strong>Home</strong>
+            </Link>
           </li>
           <li className="cursor-pointer">
-            <Link href="/about" className="nav-link">About</Link>
+            <Link href="/about" className="nav-link">
+              <strong>About</strong>
+            </Link>
           </li>
         </ul>
       </div>
       <ThemeToggle />
     </nav>
-  )
+  );
 }

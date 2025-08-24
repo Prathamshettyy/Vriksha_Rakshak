@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+/* 1. Core Tailwind setup and theme variables */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,24 +7,16 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 120 52% 55% / 20%; /* Light Mode: Lighter Pista Green */
+    --foreground: 120 30% 30%;
+    --navbar-foreground: 120 60% 40%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 120, 84.2%, 60.2%;
-    --success-foreground: 120, 40%, 98%;
+    /* ... other light mode variables ... */
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
@@ -31,48 +24,164 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 0 0% 0%; /* Dark Mode: Pure Black */
     --foreground: 210 40% 98%;
+    --navbar-foreground: 0 0% 100%;
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 120, 62.8%, 30.6%;
-    --success-foreground: 120, 40%, 98%;
+    /* ... other dark mode variables ... */
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: hsl(212.7, 26.8%, 83.9);
+    --ring: 212.7 26.8% 83.9%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border; /* Removed transition-all duration-300 ease-in-out */
+    @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans;
-    font-family: 'Poppins', sans-serif;
+    @apply bg-background text-foreground;
+    font-family: "Poppins", sans-serif;
   }
 }
 
-.gradient-bg {
-  @apply bg-gradient-to-r from-green-400 to-teal-500;
-}
-.gradient-text {
-  @apply gradient-bg text-transparent bg-clip-text;
+/* 2. Custom Ken Burns header styles */
+.ken-burns-font {
+  font-family: "Montserrat", sans-serif;
 }
 
-/* Landing Animations */
+.header {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  height: 70vw;
+  min-height: 400px;
+  max-height: 750px;
+  min-width: 300px;
+  color: #eee;
+  border-radius: 0 0 20px 20px;
+  text-shadow: 0 2px 6px #000a;
+}
+.header:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 100%,
+    hsl(var(--background)) 100%
+  );
+}
+.header:before {
+  content: "";
+  width: 100%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)),
+    hsl(var(--background))
+      url(https://images.unsplash.com/photo-1731532034431-be28681ed7b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzQwMzk5NDF8&lib=rb-4.0.3&q=85)
+      50% 0 no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  animation: grow 360s linear 10ms infinite;
+  transition: all 0.4s ease-in-out;
+  z-index: -2;
+}
+.header a {
+  color: #eee;
+}
+
+.menu {
+  display: block;
+  width: 40px;
+  height: 30px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  text-decoration: none;
+}
+.menu:after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: #fff;
+  position: absolute;
+  margin: 0 auto;
+  top: 5px;
+  left: 0;
+  right: 0;
+  box-shadow: 0 8px, 0 16px;
+}
+.sides,
+.info {
+  flex: 0 0 auto;
+  width: 50%;
+}
+.info {
+  width: 100%;
+  padding: 15% 10% 0 10%;
+  text-align: center;
+}
+.info h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.meta {
+  font-size: 0.7em;
+  font-style: italic;
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1) translateY(0px);
+  }
+  50% {
+    transform: scale(1.2) translateY(-400px);
+  }
+}
+
+.content {
+  padding: 4rem 10%;
+}
+.btn {
+  color: #eee;
+  border: 2px solid #eee;
+  border-radius: 3px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: #eee;
+  color: #222;
+}
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -83,27 +192,53 @@
     transform: translateY(0);
   }
 }
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.5s ease-out forwards;
+.animate-landing {
+  opacity: 0;
+  animation: fade-in-up 0.8s ease-out forwards;
 }
-
-/* General Card Hover Effect */
-.card-hover {
-  @apply transition-all duration-300 ease-in-out;
+.delay-1 {
+  animation-delay: 0.3s;
 }
-
-.card-hover:hover {
-  @apply shadow-lg shadow-emerald-500/50;
-  transform: translateY(-8px) scale(1.03);
+.delay-2 {
+  animation-delay: 0.6s;
 }
-
-/* General Button Hover Effect */
-.btn-hover {
-  @apply transition-transform duration-300 ease-in-out;
+@media (max-width: 768px) {
+  .header:before {
+    background-attachment: scroll;
+  }
+  .info h1 {
+    font-size: 2.5rem;
+  }
 }
-
-.btn-hover:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
+dialog {
+  display: block;
+  inset: 0;
+  transition: opacity 0.5s;
+  border-radius: 3px;
+  padding: 20px;
+  box-shadow: 0 0 10px 0 #000a;
+  background: #fffd;
+  border: 0;
+  min-width: 80vw;
+  color: #333;
+}
+dialog:not([open]) {
+  pointer-events: none;
+  opacity: 0;
+}
+dialog::backdrop {
+  backdrop-filter: blur(0.25rem);
+}
+dialog a {
+  font-size: 1.4em;
+  display: block;
+  text-align: center;
+  margin: 10px 15px;
+  padding: 5px;
+  font-weight: 600;
+  color: #333;
+}
+dialog a:hover {
+  text-decoration: underline;
+  color: #000;
 }

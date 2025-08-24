@@ -1,11 +1,9 @@
-import HowItWorks from "@/components/how-it-works"
-import Introduction from "@/components/intro"
+import Introduction from '@/components/intro';
 
-export default function Landing() {
+export default function Home() {
   return (
     <main>
       <Introduction />
-      <HowItWorks />
     </main>
-  )
+  );
 }
