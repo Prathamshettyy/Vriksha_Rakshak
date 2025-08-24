@@ -12,12 +12,11 @@ export function Navbar() {
           </p>
         </div>
         <ul className="flex gap-4">
-          {/* TODO: Add Effects */}
-          <li className="cursor-pointer hover:underline">
-            <Link href="/home">Home</Link>
+          <li className="cursor-pointer">
+            <Link href="/home" className="nav-link">Home</Link>
           </li>
-          <li className="cursor-pointer hover:underline">
-            <Link href="/about">About</Link>
+          <li className="cursor-pointer">
+            <Link href="/about" className="nav-link">About</Link>
           </li>
         </ul>
       </div>

@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import ScrollDown from "@/components/scroll-down"
-import { siteConfig } from "@/config/site"
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import ScrollDown from "@/components/scroll-down";
+import { siteConfig } from "@/config/site";
 
 export default function Introduction() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">
-      <div className="w-11/12 max-w-3xl flex flex-col items-center text-center">
+      <div className="w-11/12 max-w-3xl flex flex-col items-center text-center animate-fade-in-up">
         <h1 className="scroll-m-20 mb-6 text-5xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl uppercase gradient-text">
           {siteConfig.name}
         </h1>
@@ -19,5 +19,5 @@ export default function Introduction() {
       </div>
       <ScrollDown />
     </section>
-  )
+  );
 }

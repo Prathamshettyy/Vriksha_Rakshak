@@ -1,14 +1,14 @@
-import { ThemeProvider } from "@/components/theme-provider"
-import type { Metadata } from "next"
-import { siteConfig } from "@/config/site"
-import { Inter } from "next/font/google"
-import { Navbar } from "@/components/navbar"
-import { Toaster } from "@/components/ui/toaster"
-import Footer from "@/components/footer"
-import "./globals.css"
-import QueryWrapper from "@/components/wrapper/query-wrapper"
+import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
+import { Inter } from "next/font/google";
+import { Navbar } from "@/components/navbar";
+import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/footer";
+import "./globals.css";
+import QueryWrapper from "@/components/wrapper/query-wrapper";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     "Plant Disease Detection",
     "VrikshaRakshak",
   ],
-  creator: "Sampath Kumar & Team",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -48,29 +47,22 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@SampathKumar",
   },
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-  authors: [
-    {
-      name: "Sampath Kumar",
-      url: "https://sampathvenur.vercel.app",
-    },
   ],
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -85,5 +77,5 @@ export default function RootLayout({
         </QueryWrapper>
       </body>
     </html>
-  )
+  );
 }
