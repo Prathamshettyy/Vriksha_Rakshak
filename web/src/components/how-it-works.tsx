@@ -5,9 +5,9 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 // Import your images
-import clickPhoto from '@/assets/click-photo.jpg';
-import processing from '@/assets/processing.jpg';
-import happyGreens from '@/assets/happy-greens.jpg';
+import clickPhoto from '@/assets/click-photo.png';
+import processing from '@/assets/processing.png';
+import happyGreens from '@/assets/happy-greens.png';
 
 
 const initialSteps = [

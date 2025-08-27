@@ -24,7 +24,12 @@
   }
 
   .dark {
-    --background: 0 0% 0%; /* Dark Mode: Pure Black */
+    --background: linear-gradient(
+      135deg,
+      #181818 0%,
+      #23272a 50%,
+      #0a0a0a 100%
+    );
     --foreground: 210 40% 98%;
     --navbar-foreground: 0 0% 100%;
     --card: 222.2 84% 4.9%;
@@ -280,11 +285,11 @@ dialog a:hover {
 }
 
 .dark .static-gradient {
-   background: linear-gradient(
+  background: linear-gradient(
     135deg,
-    #00363a 0%, /* Dark cyan */
-    #012a4a 50%, /* Dark blue */
-    #2a0b3e 100% /* Deep purple */
+    #181818 0%,   /* Deeper black */
+    #23272a 50%,  /* Darker gray */
+    #0a0a0a 100%  /* Almost pure black */
   );
 }
 
