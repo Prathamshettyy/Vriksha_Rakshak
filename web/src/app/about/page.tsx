@@ -30,7 +30,7 @@ export default function About() {
   ];
 
   return (
-    <main className="min-h-screen py-24 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+<main className="static-gradient min-h-screen py-24 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
       <div className="container mx-auto">
         <ScrollAnimation>
           <div className="text-center">

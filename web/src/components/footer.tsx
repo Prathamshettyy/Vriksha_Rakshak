@@ -13,15 +13,17 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between md:gap-6">
           
           {/* Brand */}
-          <Link href="/" className="flex items-center gap-2 footer-link-modern">
+            <Link href="/" className="flex items-center  footer-link-modern">
             <Image
               src={Logo}
               alt={`${siteConfig.name} Logo`}
-              width={32}
+              width={100} // Increased logo size
+              height={100}
               quality={100}
+              className="!w-16 !h-16" // Ensures the image size is enforced
             />
             <p>{siteConfig.name}</p>
-          </Link>
+            </Link>
 
           {/* Wrapper for links and social icon */}
           <div className="flex items-center gap-6">

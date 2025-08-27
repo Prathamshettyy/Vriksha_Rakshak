@@ -24,12 +24,7 @@
   }
 
   .dark {
-    --background: linear-gradient(
-      135deg,
-      #181818 0%,
-      #23272a 50%,
-      #0a0a0a 100%
-    );
+    --background: 0 0% 0%;
     --foreground: 210 40% 98%;
     --navbar-foreground: 0 0% 100%;
     --card: 222.2 84% 4.9%;
@@ -107,17 +102,33 @@
 .header:after {
   content: "";
   width: 100%;
-  height: 100%;
+  height: 200px; /* Increase height for better fade */
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: -1;
+  /* Create gradient fade from transparent to the same background */
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 100%,
-    hsl(var(--background)) 100%
+    rgba(224, 247, 250, 0) 0%,      /* Transparent at top */
+    rgba(224, 247, 250, 0.3) 30%,   /* Light fade */
+    rgba(224, 247, 250, 0.7) 70%,   /* Medium fade */
+    rgba(224, 247, 250, 1) 100%     /* Full color at bottom */
   );
 }
+
+/* Dark mode fade */
+.dark .header:after {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,            /* transparent at top */
+    rgba(0, 0, 0, 0.6) 40%,         /* deeper black semi-transparent */
+    rgba(0, 0, 0, 0.85) 80%,        /* almost solid black */
+    #000 100%                       /* pure black at bottom */
+  );
+}
+
+
 @keyframes infinite-scroll {
   from {
     transform: translateY(0);
@@ -135,7 +146,6 @@
   width: 100%;
   height: 200%;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
     url(https://images.unsplash.com/photo-1731532034431-be28681ed7b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzQwMzk5NDF8&lib=rb-4.0.3&q=85) repeat-y;
   
   background-size: cover;
@@ -144,7 +154,7 @@
   /* --- FIX: This tells the browser to optimize for smooth animation --- */
   will-change: transform;
 
-  animation: infinite-scroll 100s linear infinite;
+  animation: infinite-scroll 125s linear infinite;
 }
 .header a {
   color: #eee;
@@ -501,3 +511,263 @@ backdrop-filter: blur(12px);
 .dark .modern-nav .theme-toggle-button:hover {
    background-color: rgba(255, 255, 255, 0.1);
 }
+/* =================== HOME PAGE SCROLL ANIMATIONS (Additional) =================== */
+
+/* Enhanced scroll animations for home page - these extend your existing animations */
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Additional animation classes for home page */
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-slide-in-from-top {
+  animation: slideInFromTop 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Extended delay classes (preserving your existing delay-1, delay-2) */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+.delay-900 { animation-delay: 900ms; }
+.delay-1000 { animation-delay: 1000ms; }
+.delay-1100 { animation-delay: 1100ms; }
+.delay-1200 { animation-delay: 1200ms; }
+.delay-1300 { animation-delay: 1300ms; }
+.delay-1400 { animation-delay: 1400ms; }
+.delay-1500 { animation-delay: 1500ms; }
+.delay-1600 { animation-delay: 1600ms; }
+
+/* Enhanced hover effects for home page */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dark .hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+}
+
+/* Enhanced gradient text animation (extends your existing gradient-text) */
+.gradient-text {
+  background: -webkit-linear-gradient(45deg, #10b981, #059669, #047857);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+.dark .gradient-text {
+  background: -webkit-linear-gradient(45deg, #ffffff, #d1d5db, #9ca3af);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Dark theme specific overrides for home page cards */
+.dark .bg-white\/70 {
+  background-color: rgba(31, 41, 55, 0.8) !important;
+}
+
+.dark .bg-white\/80 {
+  background-color: rgba(17, 24, 39, 0.9) !important;
+}
+
+.dark .bg-white\/60 {
+  background-color: rgba(31, 41, 55, 0.7) !important;
+}
+
+.dark .border-white\/20 {
+  border-color: rgba(75, 85, 99, 0.3) !important;
+}
+
+.dark .shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.dark .shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}
+
+/* Additional dark theme text color fixes for home page */
+.dark .text-gray-700 {
+  color: rgb(209, 213, 219) !important;
+}
+
+.dark .text-gray-600 {
+  color: rgb(156, 163, 175) !important;
+}
+
+.dark .text-gray-800 {
+  color: rgb(243, 244, 246) !important;
+}
+
+/* Enhanced static-gradient with your black/grey theme */
+.static-gradient {
+  background: linear-gradient(
+    135deg,
+    #e0f7fa 0%,
+    #e1f5fe 50%,
+    #f3e5f5 100%
+  );
+}
+
+.dark .static-gradient {
+  background: linear-gradient(
+    135deg,
+    #000000 0%,   /* Pure black */
+    #111827 25%,  /* Dark grey */
+    #374151 75%,  /* Medium grey */
+    #1f2937 100%  /* Dark grey */
+  );
+}
+
+/* Responsive adjustments that won't affect existing animations */
+@media (max-width: 768px) {
+  .animate-fade-in-up,
+  .animate-slide-in-from-top,
+  .animate-scale-in {
+    animation-duration: 0.6s;
+  }
+}
+
+/* Accessibility - preserving existing functionality */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-slide-in-from-top,
+  .animate-scale-in,
+  .animate-slide-in-left,
+  .animate-slide-in-right {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+}
+
+/* =================== END HOME PAGE SCROLL ANIMATIONS =================== */
+#result,
+.result-area,
+.result-card {
+  overflow-x: auto;
+  max-width: 100%;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+#result img,
+.result-area img,
+.result-card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+#result table,
+.result-area table,
+.result-card table {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.min-w-0 {
+  min-width: 0 !important;
+}
+

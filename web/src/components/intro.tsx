@@ -3,11 +3,12 @@
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
 import HowItWorks from './how-it-works';
-import { ScrollAnimation } from './scroll-animation'; // 1. Import the new component
+import { ScrollAnimation } from './scroll-animation';
 
 export default function Introduction() {
   return (
     <div className="ken-burns-font">
+      {/* Header section */}
       <div className="header">
         <div className="info">
           <h1 className="animate-landing">{siteConfig.name}</h1>
@@ -20,12 +21,13 @@ export default function Introduction() {
         </div>
       </div>
 
-      {/* 2. Wrap the section with the ScrollAnimation component */}
-      <ScrollAnimation>
-        <section className="content">
-          <HowItWorks />
-        </section>
-      </ScrollAnimation>
+      {/* Full-width How It Works - force edge-to-edge */}
+     <ScrollAnimation>
+  <div style={{ background: 'transparent' }} className="fullwidth-section">
+    <HowItWorks />
+  </div>
+</ScrollAnimation>
+
     </div>
   );
 }
