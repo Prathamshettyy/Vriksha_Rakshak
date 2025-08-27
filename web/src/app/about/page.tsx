@@ -43,7 +43,7 @@ export default function About() {
           </div>
         </ScrollAnimation>
 
-        <ScrollAnimation delay={200}>
+        <ScrollAnimation>
           <div className="my-16 p-8 md:p-12 rounded-2xl about-section">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Our Mission
@@ -55,14 +55,14 @@ export default function About() {
           </div>
         </ScrollAnimation>
 
-        <ScrollAnimation delay={200}>
+        <ScrollAnimation>
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-12">
               Core Features
             </h2>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {features.map((feature, index) => (
-                <ScrollAnimation key={feature} delay={150 * index}>
+                <ScrollAnimation key={feature}>
                   <div className="about-card h-full">
                     <div className="flex items-center justify-center h-12 w-12 rounded-full bg-green-500/20 mb-4">
                       <CheckIcon />
