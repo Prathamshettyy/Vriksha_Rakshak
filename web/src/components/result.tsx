@@ -1,128 +1,117 @@
-import { Prediction } from "@/lib/types"
-
-// For development purpose
-import { sampleData } from "@/lib/sample-data"
+import { Prediction } from "@/lib/types";
 
 interface ResultProps {
-  data: Prediction
+  data: Prediction;
 }
 
 export default function Result({ data }: ResultProps) {
-  console.log(data)
-  const prediction = data.result
+  const prediction = data.result;
+
+  const percent = (num: number, digits = 2) => (num * 100).toFixed(digits) + "%";
+
   return (
-    <div className="w-screen mt-8">
-      {/* If the image is not a plant just show one line */}
-      {prediction.is_plant.binary ? (
-        <div className="p-8 bg-secondary">
-          <p className="text-center text-3xl md:text-4xl">
-            Plant is{"  "}
-            <span className="font-bold">
-              {prediction.is_healthy.binary ? (
-                <span className="gradient-text">Healthy</span>
-              ) : (
-                <span className="text-red-500">Unhealthy</span>
-              )}
-            </span>
-          </p>
-          {/* If the plant is healthy display a motivated message :) */}
-          {prediction.is_healthy.binary && (
-            <p className="text-center mt-4 text-lg">
-              Your plant is happy, you are truly a nature lover!
-            </p>
-          )}
-          {/* If the plant is unhealthy then only display the diseases */}
-          {!prediction.is_healthy.binary && (
-            <div>
-              <p className="text-center text-lg md:text-2xl mt-8">
-                Potential Diseases
-              </p>
-              <div
-                className={`${
-                  prediction.disease.suggestions.length === 1
-                    ? ""
-                    : "md:grid-cols-1"
-                } grid gap-6 place-content-center`}
-              >
-                {prediction.disease.suggestions.map((disease) => (
-                  <div
-                    className="mt-4 text-center grid md:grid-cols-2 place-items-center gap-4"
-                    key={disease.id}
-                  >
-                    <div className="">
-                      <div className="flex items-center justify-center">
-                        <p className="text-2xl font-bold">
-                          {disease.name}:{" "}
-                          {(disease.probability * 100).toPrecision(7)}%
-                        </p>
-                      </div>
-                      <p className="my-2">Plants with {disease.name}</p>
-                      <div className="flex gap-2">
-                        {disease.similar_images.map((image) => (
-                          <div key={image.id}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={image.url}
-                              alt={image.citation}
-                              className="rounded-md"
-                            />
-                            <p className="my-4">
-                              Similarity:{" "}
-                              <span className="font-bold">
-                                {(image.similarity * 100).toPrecision(4)}%
-                              </span>
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                      <div>
-                        <h3 className="text-center font-bold text-xl mb-1">
-                          Description
-                        </h3>
-                        <p className="text-justify">
-                          {disease.details.description}
-                        </p>
-                      </div>
-                      <div>
-                        <h3 className="text-center font-bold text-xl mb-1">
-                          Treatment
-                        </h3>
-                        <div className="text-justify flex flex-col gap-2">
-                          <p>
-                            <span className="font-bold">Chemical:</span>{" "}
-                            {disease.details.treatment.chemical}
-                          </p>
-                          <p>
-                            <span className="font-bold">Biological:</span>{" "}
-                            {disease.details.treatment.biological}
-                          </p>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-center font-bold text-xl mb-1">
-                          Prevention
-                        </h3>
-                        <p className="text-justify">
-                          {disease.details.treatment.prevention}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+    <div className="w-full mt-8 max-w-4xl mx-auto px-6">
+      {!prediction.is_plant.binary ? (
+        <div className="text-center text-xl p-6 text-red-600 border border-red-400 rounded-md bg-red-50">
+          Image is not a plant. Please upload a valid plant image.
         </div>
       ) : (
-        <div className="text-center">
-          <p className="text-2xl">Image is not a Plant</p>
-          <p className="text-red-500 mt-1 text-lg">
-            Please put the correct image and retry!
-          </p>
-        </div>
+        <>
+          <div className="bg-secondary p-8 rounded-md text-center mb-12 shadow-md">
+            <p className="text-3xl font-semibold">
+              Plant is{" "}
+              <span
+                className={`font-bold ${
+                  prediction.is_healthy.binary ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {prediction.is_healthy.binary ? "Healthy" : "Unhealthy"}
+              </span>
+            </p>
+            {prediction.is_healthy.binary && (
+              <p className="mt-4 text-lg">Your plant is happy, you are truly a nature lover!</p>
+            )}
+          </div>
+
+          {!prediction.is_healthy.binary && (
+            <div className="space-y-16">
+              <h2 className="text-center text-3xl font-bold mb-6">Potential Diseases</h2>
+
+              {prediction.disease.suggestions.map((disease) => (
+                <article
+                  key={disease.id}
+                  className="border border-gray-300 rounded-lg shadow-lg p-6"
+                >
+                  <h3 className="text-2xl font-bold mb-8 text-center">
+                    {disease.name}: {percent(disease.probability, 2)}
+                  </h3>
+
+                  <div className="flex flex-wrap justify-center gap-6 mb-12">
+                    {disease.similar_images.map((image) => (
+                      <div
+                        key={image.id}
+                        className="relative w-40 h-40 overflow-hidden rounded-lg border border-gray-200 shadow-md"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={image.url}
+                          alt={image.citation || disease.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <span className="absolute bottom-2 right-2 bg-black bg-opacity-60 text-white text-xs rounded px-2 py-1 font-semibold">
+                          {(image.similarity * 100).toFixed(0)}% similarity
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <section className="space-y-8 text-gray-800 px-4 sm:px-12 lg:px-20">
+                    <div>
+                      <h4 className="font-semibold text-xl mb-3 border-b border-gray-300 pb-2">
+                        Description
+                      </h4>
+                      <p className="text-justify leading-relaxed">{disease.details.description}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-xl mb-3 border-b border-gray-300 pb-2">
+                        Chemical Treatment
+                      </h4>
+                      <p className="leading-relaxed">
+                        {(disease.details.treatment.chemical ?? []).length > 0
+                          ? disease.details.treatment.chemical.join(", ")
+                          : "N/A"}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-xl mb-3 border-b border-gray-300 pb-2">
+                        Biological Treatment
+                      </h4>
+                      <p className="leading-relaxed">
+                        {(disease.details.treatment.biological ?? []).length > 0
+                          ? disease.details.treatment.biological.join(", ")
+                          : "N/A"}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-xl mb-3 border-b border-gray-300 pb-2">
+                        Prevention
+                      </h4>
+                      <p className="leading-relaxed">
+                        {(disease.details.treatment.prevention ?? []).length > 0
+                          ? disease.details.treatment.prevention.join(", ")
+                          : "N/A"}
+                      </p>
+                    </div>
+                  </section>
+                </article>
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
-  )
+  );
 }

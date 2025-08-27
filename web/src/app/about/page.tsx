@@ -34,6 +34,7 @@ export default function About() {
       <div className="container mx-auto">
         <ScrollAnimation>
           <div className="text-center">
+            <div className="mb-8"></div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight gradient-text">
               About Vriksha Rakshak
             </h1>

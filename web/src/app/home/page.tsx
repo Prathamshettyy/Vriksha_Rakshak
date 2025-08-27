@@ -38,6 +38,7 @@ export default function Home() {
     <main className="static-gradient flex min-h-screen flex-col items-center justify-center px-5 py-24 md:p-24 overflow-x-hidden">
       {/* Header Section */}
       <div className="text-center mb-auto animate-fade-in-up">
+        <div className="h-8" />
         <h1 className="scroll-m-20 mb-4 text-3xl md:text-4xl font-extrabold tracking-tight lg:text-5xl animate-slide-in-from-top">
           <span className="gradient-text">{siteConfig.name}</span> - Plant
           Disease Detection
