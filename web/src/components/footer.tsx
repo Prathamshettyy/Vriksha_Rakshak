@@ -1,67 +1,51 @@
 import Image from "next/image"
 import Logo from "@/assets/logo.png"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { GitHubLogoIcon } from "@radix-ui/react-icons"
 import { siteConfig } from "@/config/site"
 
 export default function Footer() {
   return (
-    <footer className="bg-accent/50">
-      <div className="w-11/12 md:w-2/3 px-4 py-8 mx-auto grid lg:grid-cols-3">
-        <div className="flex flex-col lg:border-r lg:border-r-foreground/50 ">
-          <div className="flex gap-2 items-center lg:justify-start justify-center">
+    <footer className="site-footer">
+      {/* Reduced vertical padding for a thinner overall look */}
+      <div className="container mx-auto px-6 py-3">
+        {/* Reduced gap between elements on mobile from gap-6 to gap-4 */}
+        <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between md:gap-6">
+          
+          {/* Brand */}
+          <Link href="/" className="flex items-center gap-2 footer-link-modern">
             <Image
               src={Logo}
               alt={`${siteConfig.name} Logo`}
-              width={75}
+              width={32}
               quality={100}
-              className="-ml-3"
             />
-            <p className="text-2xl font-extrabold">{siteConfig.name}</p>
+            <p>{siteConfig.name}</p>
+          </Link>
+
+          {/* Wrapper for links and social icon */}
+          <div className="flex items-center gap-6">
+            <nav className="flex gap-6">
+              <Link href="/home" className="footer-link-modern">Home</Link>
+              <Link href="/about" className="footer-link-modern">About</Link>
+            </nav>
+
+            <a
+              href="https://github.com/prathamshettyy/vriksha_rakshak"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-social-link"
+              aria-label="GitHub Repository"
+            >
+              <GitHubLogoIcon className="h-6 w-6" />
+            </a>
           </div>
-          <p className="lg:w-5/6 mt-2 text-center lg:text-left max-w-sm lg:max-w-none mx-auto lg:mx-0">
-          Merging Innovation with Nature, Revealing the Secrets of Plant Health.
-          </p>
         </div>
-        <div className="flex flex-col lg:border-r lg:border-r-foreground/50 items-center">
-          <div className="flex gap-2 items-center">
-            <p className="mt-8 lg:mt-4 font-bold text-lg">Explore</p>
-          </div>
-          <ul className="w-2/3 flex flex-col mt-2">
-            <Button variant="link" asChild>
-              <Link href="/">Introduction</Link>
-            </Button>
-            <Button variant="link" asChild>
-              <Link href="/home">Home</Link>
-            </Button>
-            <Button variant="link" asChild>
-              <Link href="/about">About</Link>
-            </Button>
-          </ul>
+
+        {/* Reduced spacing for the copyright section */}
+        <div className="mt-4 border-t border-t-black/10 dark:border-t-white/10 pt-3 text-center text-xs footer-copyright">
+          <p>&#169; {new Date().getFullYear()} {siteConfig.name}. All Rights Reserved.</p>
         </div>
-        <div className="flex flex-col items-center">
-          <div className="flex gap-2 items-center">
-            <p className="mt-4 font-bold text-lg text-center px-2">
-              Contribute to {siteConfig.name}
-            </p>
-          </div>
-          <ul className="w-2/3 flex flex-col mt-2">
-            <Button variant="link" asChild>
-              <Link
-                href="https://github.com/sampathvenur/"
-                target="_blank"
-                className="flex items-center gap-2"
-              >
-                <GitHubLogoIcon />
-                <p>GitHub</p>
-              </Link>
-            </Button>
-          </ul>
-        </div>
-      </div>
-      <div className="bg-accent/50 text-center py-4">
-        <p>&#169; Copyrights - {new Date().getFullYear()}</p>
       </div>
     </footer>
   )

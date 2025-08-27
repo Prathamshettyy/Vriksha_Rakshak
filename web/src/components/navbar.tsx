@@ -3,29 +3,25 @@
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
+import Logo from "@/assets/logo.png" // Import your logo
+import Image from "next/image"
 
 export function Navbar() {
   return (
-    // Add the new text color class here
-    <nav className="flex fixed w-full backdrop-blur-sm items-center px-4 py-4 justify-between z-50 bg-[hsl(var(--navbar-background))] text-[hsl(var(--navbar-foreground))]">
-      <div className="flex gap-8 items-center">
-        <div>
-          <p className="scroll-m-20 text-xl font-semibold">
+    <nav className="modern-nav">
+      <div className="flex items-center gap-2">
+        <Image src={Logo} alt={`${siteConfig.name} Logo`} width={32} quality={100} />
+        <p className="nav-brand text-lg font-semibold">
             <Link href="/">{siteConfig.name}</Link>
-          </p>
-        </div>
-        <ul className="flex gap-4">
-          <li className="cursor-pointer">
-            <Link href="/home" className="nav-link">
-              <strong>Home</strong>
-            </Link>
-          </li>
-          <li className="cursor-pointer">
-            <Link href="/about" className="nav-link">
-              <strong>About</strong>
-            </Link>
-          </li>
-        </ul>
+        </p>
+      </div>
+      <div className="hidden md:flex items-center gap-2">
+        <Link href="/home" className="nav-link-modern">
+          Home
+        </Link>
+        <Link href="/about" className="nav-link-modern">
+          About
+        </Link>
       </div>
       <ThemeToggle />
     </nav>

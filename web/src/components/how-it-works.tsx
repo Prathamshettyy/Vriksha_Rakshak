@@ -150,7 +150,7 @@ export default function HowItWorks() {
           width: min(30vw,400px);
           position: absolute;
           top: 50%;
-          left: 3rem;
+          left: 2rem;
           transform: translateY(-50%);
           font: 400 0.85rem helvetica,sans-serif;
           color: white;

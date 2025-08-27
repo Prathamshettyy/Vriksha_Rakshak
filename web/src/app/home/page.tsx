@@ -3,18 +3,18 @@ import { siteConfig } from "@/config/site";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-5 py-24 md:p-24 overflow-x-hidden">
+    <main className="static-gradient flex min-h-screen flex-col items-center justify-center px-5 py-24 md:p-24 overflow-x-hidden">
       <div className="text-center mb-auto animate-fade-in-up">
-        <h1 className="scroll-m-20 mb-4 text-3xl md:text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="scroll-m-20 mb-4 text-3xl md:text-4xl font-extrabold tracking-tight lg:text-5xl animate-slide-in-from-top">
           <span className="gradient-text">{siteConfig.name}</span> - Plant
           Disease Detection
         </h1>
-        <h2 className="scroll-m-20 border-b pb-2 text-xl md:text-2xl font-semibold tracking-tight transition-colors first:mt-0">
+        <h2 className="scroll-m-20 border-b pb-2 text-xl md:text-2xl font-semibold tracking-tight transition-colors first:mt-0 animate-fade-in [animation-delay:500ms]">
           <span className="gradient-text">Prakriti Ki Suraksha, </span> Machine
           Learning Ke Saath
         </h2>
       </div>
-      <div className="mb-auto animate-fade-in-up">
+      <div className="mb-auto rounded-lg">
         <ImageBox />
       </div>
     </main>

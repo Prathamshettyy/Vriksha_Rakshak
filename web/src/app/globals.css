@@ -39,14 +39,42 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
+.home-background {
+    --background: 120 52% 55% / 20%; /* Light Mode for home page */
+  }
+
+  .dark .home-background {
+    --background: 120 10% 5%; /* Dark Mode for home page */
+  }
 
 @layer base {
+  /* ... (keep your :root and .dark variable definitions as they are) ... */
+
   * {
     @apply border-border;
   }
+
+  /*
+    This is the corrected section.
+    We set the gradient for the light theme by default.
+  */
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: linear-gradient(
+      135deg,
+      #e0f7fa 0%,
+      #e1f5fe 50%,
+      #f3e5f5 100%
+    );
     font-family: "Poppins", sans-serif;
+  }
+
+  /*
+    Then, we explicitly override the 'background' property for dark mode
+    to use the solid color from your CSS variables.
+  */
+  .dark body {
+    background: hsl(var(--background));
   }
 }
 
@@ -61,9 +89,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;
-  align-content: flex-start;
-  height: 70vw;
+  /* --- FIX: Change this from flex-start to center --- */
+  align-items: center; 
+  height: 100vh; /* This ensures it's full-screen to allow for centering */
   min-height: 400px;
   max-height: 750px;
   min-width: 300px;
@@ -85,27 +113,33 @@
     hsl(var(--background)) 100%
   );
 }
+@keyframes infinite-scroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%); /* This moves the background up by one full image height */
+  }
+}
+
 .header:before {
   content: "";
-  width: 100%;
-  height: 200%;
   position: absolute;
   top: 0;
   left: 0;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  width: 100%;
+  height: 200%;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)),
-    hsl(var(--background))
-      url(https://images.unsplash.com/photo-1731532034431-be28681ed7b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzQwMzk5NDF8&lib=rb-4.0.3&q=85)
-      50% 0 no-repeat;
-  background-size: 100%;
-  background-attachment: fixed;
-  animation: grow 360s linear 10ms infinite;
-  transition: all 0.4s ease-in-out;
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+    url(https://images.unsplash.com/photo-1731532034431-be28681ed7b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzQwMzk5NDF8&lib=rb-4.0.3&q=85) repeat-y;
+  
+  background-size: cover;
   z-index: -2;
+  
+  /* --- FIX: This tells the browser to optimize for smooth animation --- */
+  will-change: transform;
+
+  animation: infinite-scroll 100s linear infinite;
 }
 .header a {
   color: #eee;
@@ -142,7 +176,8 @@
 }
 .info {
   width: 100%;
-  padding: 15% 10% 0 10%;
+  /* --- FIX: Change padding to allow flexbox centering --- */
+  padding: 5% 10%; /* Removed the large top padding */
   text-align: center;
 }
 .info h1 {
@@ -155,14 +190,6 @@
   font-style: italic;
 }
 
-@keyframes grow {
-  0% {
-    transform: scale(1) translateY(0px);
-  }
-  50% {
-    transform: scale(1.2) translateY(-400px);
-  }
-}
 
 .content {
   padding: 4rem 10%;
@@ -241,4 +268,231 @@ dialog a {
 dialog a:hover {
   text-decoration: underline;
   color: #000;
+}
+/* Add these styles for the static home page background */
+.static-gradient {
+  background: linear-gradient(
+    135deg,
+    #e0f7fa 0%, /* A very light cyan */
+    #e1f5fe 50%, /* A light blue */
+    #f3e5f5 100% /* A soft lavender */
+  );
+}
+
+.dark .static-gradient {
+   background: linear-gradient(
+    135deg,
+    #00363a 0%, /* Dark cyan */
+    #012a4a 50%, /* Dark blue */
+    #2a0b3e 100% /* Deep purple */
+  );
+}
+
+/* Also, let's enhance the gradient-text class for a more vibrant look */
+.gradient-text {
+  background: -webkit-linear-gradient(45deg, #10b981, #059669, #047857);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Ensure the dark mode version is also updated if you want them to match */
+.dark .gradient-text {
+    background: -webkit-linear-gradient(45deg, #34d399, #10b981, #6ee7b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Animation keyframes (should already exist from previous steps) */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px); /* Increased distance for a more noticeable effect */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* A class to apply to elements that will be animated on scroll */
+.scroll-animate {
+  opacity: 0; /* Start hidden */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+  Bright & Modern Footer Design
+*/
+.site-footer {
+  margin-top: auto;
+  /* --- Light Theme: Bright Glass --- */
+  background-color: rgba(80, 182, 156, 0.448);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* --- Dark Theme: Dark Glass --- */
+.dark .site-footer {
+  background-color: rgba(5, 15, 25, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modern, high-contrast link style */
+.footer-link-modern {
+  @apply text-sm transition-all duration-300;
+  /* --- Light Theme: Strong Text Color --- */
+  color: hsl(240 10% 20%);
+}
+
+.footer-link-modern:hover {
+  color: hsl(240 10% 3.9%); /* Near Black on hover */
+}
+
+/* --- Dark Theme Link Overrides --- */
+.dark .footer-link-modern {
+  @apply text-white/70;
+}
+
+.dark .footer-link-modern:hover {
+  @apply text-white;
+}
+
+/* Social Icon Style */
+.footer-social-link {
+  @apply transition-all duration-300;
+  color: hsl(240 10% 40%);
+}
+.footer-social-link:hover {
+  color: hsl(240 10% 3.9%);
+  transform: scale(1.1);
+}
+.dark .footer-social-link {
+  @apply text-white/70;
+}
+.dark .footer-social-link:hover {
+  @apply text-white;
+}
+
+/* Copyright Text Style */
+.footer-copyright {
+  color: hsl(240 10% 50%);
+}
+.dark .footer-copyright {
+  @apply text-white/50;
+}
+
+/* Glassmorphism section for the 'Our Mission' box */
+.about-section {
+  background-color: hsla(120, 35%, 35%, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .about-section {
+  background-color: rgba(5, 15, 25, 0.6);
+}
+
+/* Styling for the feature cards with proper theme support */
+.about-card {
+  @apply flex flex-col items-center p-6 rounded-xl transition-all duration-300;
+  animation: fade-in-up 0.5s ease-out forwards;
+  opacity: 0; /* Start hidden for animation */
+
+  /* --- Light Theme Styles --- */
+  background-color: hsla(120, 50%, 98%, 0.7); /* A more opaque, very light green/white */
+  border: 1px solid hsla(120, 30%, 50%, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.about-card:hover {
+  transform: translateY(-8px);
+  /* --- Light Theme Hover --- */
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Dark Theme Overrides --- */
+.dark .about-card {
+   background-color: rgba(255, 255, 255, 0.05);
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   box-shadow: none; /* No shadow needed in dark mode */
+}
+
+.dark .about-card:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+/* Modern Navbar Styles */
+.modern-nav {
+  @apply fixed top-4 left-1/2 -translate-x-1/2 w-11/12 max-w-4xl z-50 flex items-center justify-between px-4 py-2 rounded-xl border;
+background-color: rgba(75, 75, 76, 0.373);  
+backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dark .modern-nav {
+  background-color: rgba(10, 20, 30, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Modern Nav Link Styles */
+.nav-link-modern {
+  @apply px-3 py-1 text-sm font-medium rounded-md transition-all duration-200;
+  /* --- FIX: Light Theme Text Color --- */
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Add shadow for readability */
+}
+
+.nav-link-modern:hover {
+  /* --- Light Theme Hover --- */
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Dark Theme Overrides --- */
+.dark .nav-link-modern {
+  @apply text-foreground/60;
+  text-shadow: none;
+}
+
+.dark .nav-link-modern:hover {
+  @apply text-foreground bg-white/10;
+}
+
+/* Style for the Navbar Brand Name */
+.nav-brand {
+  /* --- FIX: Light Theme: White --- */
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* --- Dark Theme: White --- */
+.dark .nav-brand {
+  color: white;
+  text-shadow: none;
+}
+/* Custom styles for the Theme Toggle button in the navbar */
+.modern-nav .theme-toggle-button {
+  /* --- Light Theme --- */
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.modern-nav .theme-toggle-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Dark Theme --- */
+.dark .modern-nav .theme-toggle-button {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.dark .modern-nav .theme-toggle-button:hover {
+   background-color: rgba(255, 255, 255, 0.1);
 }
