@@ -53,9 +53,17 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "68x68" },
+      { url: "/favicon-32x32.png", sizes: "32x32" },
+      { url: "/favicon-192x192.png", sizes: "192x192" },
+    ],
     shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180" },
+      { url: "/apple-touch-icon-152x152.png", sizes: "152x152" },
+      { url: "/apple-touch-icon-167x167.png", sizes: "167x167" },
+    ],
   },
 };
 
