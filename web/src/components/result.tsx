@@ -10,7 +10,8 @@ export default function Result({ data }: ResultProps) {
   const percent = (num: number, digits = 2) => (num * 100).toFixed(digits) + "%";
 
   return (
-    <div className="w-full mt-8 max-w-4xl mx-auto px-6">
+    // REMOVED horizontal padding (px-4 sm:px-6) to allow full width
+    <div className="w-full mt-8 mx-auto md:max-w-5xl">
       {!prediction.is_plant.binary ? (
         <div className="text-center text-xl p-6 text-red-600 border border-red-400 rounded-md bg-red-50">
           Image is not a plant. Please upload a valid plant image.
@@ -40,9 +41,9 @@ export default function Result({ data }: ResultProps) {
               {prediction.disease.suggestions.map((disease) => (
                 <article
                   key={disease.id}
-                  className="border border-gray-300 rounded-lg shadow-lg p-6"
+                  className="result-card border border-gray-300 rounded-lg shadow-lg p-4 sm:p-6 w-full"
                 >
-                  <h3 className="text-2xl font-bold mb-8 text-center">
+                  <h3 className="text-xl md:text-2xl font-bold mb-8 text-center">
                     {disease.name}: {percent(disease.probability, 2)}
                   </h3>
 
@@ -50,7 +51,7 @@ export default function Result({ data }: ResultProps) {
                     {disease.similar_images.map((image) => (
                       <div
                         key={image.id}
-                        className="relative w-40 h-40 overflow-hidden rounded-lg border border-gray-200 shadow-md"
+                        className="relative w-48 h-48 overflow-hidden rounded-lg border border-gray-200 shadow-md"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -65,19 +66,21 @@ export default function Result({ data }: ResultProps) {
                     ))}
                   </div>
 
-                  <section className="space-y-8 text-gray-800 px-4 sm:px-12 lg:px-20">
+                  <section className="space-y-8 text-gray-800 px-2 sm:px-8">
                     <div>
                       <h4 className="font-semibold text-xl mb-3 border-b border-gray-300 pb-2">
                         Description
                       </h4>
-                      <p className="text-justify leading-relaxed">{disease.details.description}</p>
+                      <p className="text-left md:text-justify leading-relaxed break-words">
+                        {disease.details.description}
+                      </p>
                     </div>
 
                     <div>
                       <h4 className="font-semibold text-xl mb-3 border-b border-gray-300 pb-2">
                         Chemical Treatment
                       </h4>
-                      <p className="leading-relaxed">
+                      <p className="leading-relaxed text-left md:text-justify break-words">
                         {(disease.details.treatment.chemical ?? []).length > 0
                           ? disease.details.treatment.chemical.join(", ")
                           : "N/A"}
@@ -88,7 +91,7 @@ export default function Result({ data }: ResultProps) {
                       <h4 className="font-semibold text-xl mb-3 border-b border-gray-300 pb-2">
                         Biological Treatment
                       </h4>
-                      <p className="leading-relaxed">
+                      <p className="leading-relaxed text-left md:text-justify break-words">
                         {(disease.details.treatment.biological ?? []).length > 0
                           ? disease.details.treatment.biological.join(", ")
                           : "N/A"}
@@ -99,7 +102,7 @@ export default function Result({ data }: ResultProps) {
                       <h4 className="font-semibold text-xl mb-3 border-b border-gray-300 pb-2">
                         Prevention
                       </h4>
-                      <p className="leading-relaxed">
+                      <p className="leading-relaxed text-left md:text-justify break-words">
                         {(disease.details.treatment.prevention ?? []).length > 0
                           ? disease.details.treatment.prevention.join(", ")
                           : "N/A"}

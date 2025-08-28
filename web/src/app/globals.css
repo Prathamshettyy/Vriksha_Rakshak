@@ -402,7 +402,6 @@ dialog a:hover {
   @apply text-white/50;
 }
 
-/* Glassmorphism section for the 'Our Mission' box */
 .about-section {
   background-color: hsla(120, 35%, 35%, 0.6);
   backdrop-filter: blur(14px);
@@ -743,9 +742,10 @@ backdrop-filter: blur(12px);
 #result,
 .result-area,
 .result-card {
-  overflow-x: auto;
+  /* overflow-x: auto; <-- This line was removed */
   max-width: 100%;
-  word-break: break-word;
+  overflow-wrap: break-word; /* Ensures long words wrap to the next line */
+  word-break: break-word; 
   box-sizing: border-box;
 }
 
@@ -770,4 +770,3 @@ backdrop-filter: blur(12px);
 .min-w-0 {
   min-width: 0 !important;
 }
-

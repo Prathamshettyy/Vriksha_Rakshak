@@ -47,11 +47,11 @@ export default function About() {
         <ScrollAnimation>
           <div className="my-16 p-8 md:p-12 rounded-2xl about-section">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Our Mission
+              Project Vision
             </h2>
             <p className="text-white/80 md:text-justify">
               Vriksha Rakshak is a plant disease prediction and remedy suggestion
-              application. It leverages a powerful Convolutional Neural Network (CNN) to analyze plant images, providing swift insights into potential diseases and their treatments. Our goal is to empower farmers and gardeners with an accessible tool to identify plant diseases and receive immediate, actionable remedies.
+              application. It leverages a powerful Convolutional Neural Network (CNN) to analyze plant images, providing swift insights into potential diseases and their treatments. The goal is to empower farmers and gardeners with an accessible tool to identify plant diseases and receive immediate, actionable remedies.
             </p>
           </div>
         </ScrollAnimation>

@@ -35,9 +35,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="static-gradient flex min-h-screen flex-col items-center justify-center px-5 py-24 md:p-24 overflow-x-hidden">
-      {/* Header Section */}
+ <main className="static-gradient flex min-h-screen flex-col items-center justify-between px-4 py-12 sm:px-6 md:px-8 md:py-24">
+        {/* Header Section */}
       <div className="text-center mb-auto animate-fade-in-up">
+        <div className="h-8" />
         <div className="h-8" />
         <h1 className="scroll-m-20 mb-4 text-3xl md:text-4xl font-extrabold tracking-tight lg:text-5xl animate-slide-in-from-top">
           <span className="gradient-text">{siteConfig.name}</span> - Plant
@@ -125,7 +126,7 @@ export default function Home() {
               AI Analysis
             </h4>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Our ML model analyzes the image for diseases
+              The ML model analyzes the image for diseases
             </p>
           </div>
 

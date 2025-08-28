@@ -68,22 +68,18 @@ export function ImageBox() {
   }
 
   return (
-    <section className="mt-8 md:mt-4">
+    <section className="mt-8 w-full md:mt-4">
       <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center">
-          <label htmlFor="plant-image" className="cursor-pointer">
-            <div className="relative w-72 mt-4 flex items-center justify-center aspect-square mx-auto border-2 dark:border-white border-black border-dashed rounded-lg">
+        <div className="flex w-full flex-col items-center">
+          <label htmlFor="plant-image" className="w-full cursor-pointer">
+            {/* Using responsive height and aspect ratio for the best fit on all devices */}
+            <div className="relative mx-auto mt-4 flex w-full max-w-xl items-center justify-center aspect-square md:aspect-auto md:h-[500px] border-2 border-dashed border-black p-4 dark:border-white rounded-lg">
               {imageURL ? (
-                <Image src={imageURL} alt="Image" fill className="rounded-lg" />
+                // Reverted to object-cover to ensure the image fills the container
+                <Image src={imageURL} alt="Image" fill className="rounded-lg object-cover" />
               ) : (
-                <div className="flex flex-col gap-2 p-4 justify-center items-center">
-                  {/* <Image
-                    src="/logo.png"
-                    alt="Logo"
-                    width={48}
-                    height={48}
-                  /> */}
-                  <p className="text-center">Upload Plant Image Here</p>
+                <div className="flex flex-col gap-2 p-4 justify-center items-center text-center">
+                  <p>Upload Plant Image Here</p>
                 </div>
               )}
               <input
@@ -104,8 +100,7 @@ export function ImageBox() {
               </Button>
             ) : (
               <div className="flex flex-col justify-center gap-4 items-center">
-                <p>{imageFile.name} Uploaded!</p>
-                {/* Disable the button when the process is running or already previous data is there */}
+                <p className="text-sm text-gray-600 dark:text-gray-400">{imageFile.name} Uploaded!</p>
                 <Button type="submit" disabled={isInitialLoading || data}>
                   {isInitialLoading && (
                     <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
